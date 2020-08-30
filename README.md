@@ -11,6 +11,5 @@ Yet another headless bluetooth A2DP bluetooth audio setup that lets you stream m
 ## Clean Raspbian OS Installation
 
 * Download image from https://www.raspberrypi.org/downloads/raspberry-pi-os/
-* flash the image using dd: ´´´unzip -p 2020-08-20-raspios-buster.zip | sudo dd of=/dev/sdX bs=4M status=progress conv=fsync
-´´´
+* flash the image using `unzip` and `dd`: `unzip -p 2020-08-20-raspios-buster.zip | sudo dd of=/dev/sdX bs=4M status=progress conv=fsync`
 
