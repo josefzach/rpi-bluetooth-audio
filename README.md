@@ -62,6 +62,7 @@ This project is about using an old Raspberry 1B as a headless bluetooth audio re
 3. Add line `bluealsa-aplay 00:00:00:00:00:00` to file `/etc/rc.local` to forward audio to audio device
    - Note: Attempts to install a service `a2dp-playback.service` as suggested in [2] were not successful
 
+## Done!
 
 # References
 1. ['Another How to turn your Pi in a Bluetooth Speaker Tutorial'](https://www.raspberrypi.org/forums/viewtopic.php?f=35&t=235519&sid=632ae5b5a8d9d618e8c36c154af730b3) by DrFunk. Uses PulseAudio. I found the part about automatic bluetooth pairing especially helpful!
