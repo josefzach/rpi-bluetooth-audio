@@ -32,27 +32,31 @@ This project is about using an old Raspberry 1B as a headless bluetooth audio re
    - `sudo systemctl restart bluetooth.service`
 2. Set-up bluetooth connection agent (with PIN)
    - `sudo apt-get install bluez-tools`
-   - Install new service `bt-agent.service`
-   ``` [Unit]
-       Description=Bluetooth Auth Agent
-       After=bluetooth.service
-       PartOf=bluetooth.service
+   - Create PIN configuration file `/etc/bluetooth/pin.conf`
+     ```*      1234```
+   - Create new service file `/etc/systemd/system/bt-agent.service`
+     ```[Unit]
+        Description=Bluetooth Auth Agent
+        After=bluetooth.service
+        PartOf=bluetooth.service
 
-       [Service]
-       Type=simple
-       ExecStart=/usr/bin/bt-agent -c NoInputNoOutput -p /etc/bluetooth/pin.conf
-       ExecStartPost=/bin/sleep 1
-       ExecStartPost=/bin/hciconfig hci0 sspmode 0
+        [Service]
+        Type=simple
+        ExecStart=/usr/bin/bt-agent -c NoInputNoOutput -p /etc/bluetooth/pin.conf
+        ExecStartPost=/bin/sleep 1
+        ExecStartPost=/bin/hciconfig hci0 sspmode 0
        
-       [Install]
-       WantedBy=bluetooth.target```
+        [Install]
+        WantedBy=bluetooth.target````
+   - `sudo systemctl enable bt-agent.service`
+   - `sudo systemctl start bt-agent.service`
+   - `sudo systemctl status bt-agent.service`
 
    
 ## Set-up Audio Streaming
 2. Install BlueZ ALSA (link between bluetooth and ALSA): `sudo apt-get install bluealsa`
 3. Add line `bluealsa-aplay 00:00:00:00:00:00` to file `/etc/rc.local` to forward audio to audio device
    - Note: Attempts to install a service `a2dp-playback.service` as suggested in [2] were not successful
-
 
 
 # References
