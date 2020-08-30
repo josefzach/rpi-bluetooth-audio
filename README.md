@@ -5,7 +5,7 @@ Why another raspberri pi bluetooth audio instruction?
 2. This instruction is based on a few instructions that I found on the net. It is a collection of the parts that best fit my needs. All instructions are listed as references below.
 
 # About
-This project is about using an old Raspberry 1B as a headless bluetooth receiver for streaming music to my car´s hi-fi. The requirements were to 
+This project is about using an old Raspberry 1B as a headless bluetooth audio receiver for streaming music to my car´s hi-fi. The requirements were to 
 
 # Prerequisits
 * Raspberry Pi 1(B)
@@ -22,14 +22,33 @@ This project is about using an old Raspberry 1B as a headless bluetooth receiver
 4. `sudo raspi-config` to resize partition to use all space available on sd card
 5. `sudo apt-get update`, `sudo apt-get upgrade`
 6. `sudo usermod -a -G bluetooth pi` to add user pi to the bluetooth group
+7. `sudo raspi-config` to set automatic log in for user pi (can be skipped?)
 
 ## Configure Bluetooth Stack
-1. Make RPi discoverable as bluetooth sink
+1. Make RPi discoverable as bluetooth sink (can be skipped?)
    - `sudo nano /etc/bluetooth/main.conf`
    - Uncomment/Edit `Class=0x41C`
    - Uncomment/Edit `DiscoverableTimeout = 0`
    - `sudo systemctl restart bluetooth.service`
-2. Install BlueZ ALSA (link between bluetooth and ALSA) `sudo apt-get install bluealsa`
+2. Set-up bluetooth connection agent (with PIN)
+   - `sudo apt-get install bluez-tools`
+   - Install new service `bt-agent.service`
+   ``` [Unit]
+Description=Bluetooth Auth Agent
+After=bluetooth.service
+PartOf=bluetooth.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/bt-agent -c NoInputNoOutput -p /etc/bluetooth/pin.conf
+ExecStartPost=/bin/sleep 1
+ExecStartPost=/bin/hciconfig hci0 sspmode 0```
+
+   
+## Set-up Audio Streaming
+2. Install BlueZ ALSA (link between bluetooth and ALSA): `sudo apt-get install bluealsa`
+3. Add line `bluealsa-aplay 00:00:00:00:00:00` to file `/etc/rc.local` to forward audio to audio device
+   - Note: Attempts to install a service `a2dp-playback.service` as suggested in [2] were not successful
 
 
 
