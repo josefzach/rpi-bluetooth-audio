@@ -5,7 +5,7 @@ Why another raspberri pi bluetooth audio instruction?
 2. This instruction is based on a few instructions that I found on the net. It is a collection of the parts that best fit my needs. All instructions are listed as references below.
 
 # About
-This project is about using an old Raspberry 1B as a headless bluetooth audio receiver for streaming music to my car´s hi-fi. The requirements were to 
+This project is about using an old Raspberry 1B as a headless bluetooth audio receiver for streaming music to my car´s hi-fi. As a requirement, I did not want to use PulseAudio because it turned out to be ressource-heavy and to produce choppy sound on my RPi 1.
 
 # Prerequisits
 * Raspberry Pi 1(B)
