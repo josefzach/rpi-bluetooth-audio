@@ -60,7 +60,7 @@ This project is about using an old Raspberry 1B as a headless bluetooth audio re
 ## Set-up Audio Streaming
 1. Install BlueZ ALSA (link between bluetooth and ALSA): `sudo apt-get install bluealsa`
 2. Add line `bluealsa-aplay 00:00:00:00:00:00` to file `/etc/rc.local` to forward audio to audio device
-   - Note: Attempts to install a service `a2dp-playback.service` as suggested in [2] were not successful
+   - Note: Attempts to install as service `a2dp-playback.service` as suggested in [2] were not successful
 
 ## Enable Overlay File System
 1. Enable built-in overlay file system via `sudo raspi-config`
