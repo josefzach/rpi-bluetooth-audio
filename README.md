@@ -33,7 +33,8 @@ This project is about using an old Raspberry 1B as a headless bluetooth audio re
 2. Set-up bluetooth connection agent (with PIN)
    - `sudo apt-get install bluez-tools`
    - Create PIN configuration file `/etc/bluetooth/pin.conf`
-     ```*      1234```
+     ```*      1234
+     ```
    - Create new service file `/etc/systemd/system/bt-agent.service`
      ```[Unit]
         Description=Bluetooth Auth Agent
